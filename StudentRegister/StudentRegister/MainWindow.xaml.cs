@@ -14,21 +14,28 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
-namespace StudentRegister
+namespace StudentRegister 
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Student> students;
+        ObservableCollection<Student> students;
 
         public MainWindow()
         {
             InitializeComponent();
-            students = new List<Student>();
+            students = new ObservableCollection<Student>();
             students.Add(new Student("Jack", "Nimble"));
             students.Add(new Student("Mary", "Contrary"));
+            StudentList.ItemsSource = students;
+            SelectedStudent.Content = students;
+        }
+
+        public void AddCourse(object sender, EventArgs args)
+        {
+            students[1].CourseComplete("Test", 3, Grade.A, "Spring 2019");
         }
     }
 }
